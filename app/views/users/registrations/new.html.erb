@@ -7,14 +7,14 @@
   <%= f.fields_for :profile do |p| %>
   <fieldset class="form-group">
     <%= p.label :name %>
-    <%= p.text_field :name, autofocus: true, class: 'form-control' %>
+    <%= p.text_field :name, class: 'form-control' %>
   </fieldset>
   <% end %>
 
 
   <fieldset class="form-group">
     <%= f.label :email %>
-    <%= f.email_field :email, class: 'form-control' %>
+    <%= f.email_field :email, autofocus: true, class: 'form-control' %>
   </fieldset>
 
   <fieldset class="form-group">
