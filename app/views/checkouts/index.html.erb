@@ -1,0 +1,16 @@
+<h1>My Checkouts</h1>
+
+<% if @checkouts.present? %>
+  <% @checkouts.each do |checkout| %>
+    <div class="book-item">
+      <%= link_to 'Return', checkout, method: :delete, data: { confirm: "Are you sure you want to return this #{checkout.book.title}?" }, class: 'btn btn-sm btn-primary pull-sm-right' %>
+      <%= image_tag checkout.book.book_image, class: 'img pull-sm-left' %>
+      <h4><%= link_to checkout.book.title, checkout.book.url, target: '_blank' %></h4>
+      <span><%= checkout.book.author %></span><br/>
+      <small>Owned by: <%= checkout.book.user.email %></small>
+      <p>Checked out on <%= checkout.checkout_date %></p>
+    </div>
+  <% end %>
+<% else %>
+  <p>You currently have no books checked out.</p>
+<% end %>
