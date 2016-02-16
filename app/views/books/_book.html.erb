@@ -1,0 +1,17 @@
+<div class="book-item">
+  <% if get_availability(book) %>
+  <%= link_to 'Checkout', checkouts_path(book: book), method: :post, data: { confirm: "Are you sure you would like to checkout #{book.title}?" }, class: 'btn btn-sm btn-primary pull-sm-right' %>
+  <% else %>
+  <label class="label label-danger pull-sm-right">Checked out</label>
+  <small>Checked out by <%= book.checkout.user.profile.name %> on <%= book.checkout.checkout_date.strftime("%b %d, %Y") %></small>
+  <% end %>
+  <%= image_tag book.book_image, class: 'img pull-sm-left' %>
+  <h4><%= link_to book.title, book.url, target: '_blank' %></h4>
+  <span><%= book.author %></span><br/>
+  <small>Owned by: <%= book.user.profile.name %></small><br/>
+
+  <% if book.user == current_user %>
+    <%= link_to 'Edit', edit_book_path(book) %>
+    <%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %>
+</div>

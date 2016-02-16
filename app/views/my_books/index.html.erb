@@ -1,4 +1,4 @@
-<h1>My Books</h1>
+<h1>My Books <%= link_to 'Add a book', new_book_path, class: 'btn btn-success pull-sm-right' %></h1>
 
 <% if @books.present? %>
   <% @books.each do |book| %>
@@ -13,7 +13,6 @@
       <span><%= book.author %></span><br/>
       <small>Owned by: <%= book.user.profile.name %></small><br/>
 
-      <%= link_to 'Show', book %>
       <%= link_to 'Edit', edit_book_path(book) %>
       <%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %>
 

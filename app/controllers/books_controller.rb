@@ -9,13 +9,13 @@ class BooksController < ApplicationController
       @books = Book.search(params[:search]).order("created_at DESC")
     else
       @books = Book.all.order('created_at DESC')
-  end
+    end
   end
 
   # GET /books/1
   # GET /books/1.json
-  def show
-  end
+  # def show
+  # end
 
   # GET /books/new
   def new
@@ -24,6 +24,7 @@ class BooksController < ApplicationController
 
   # GET /books/1/edit
   def edit
+    redirect_to books_path unless @book.user == current_user
   end
 
   # POST /books
@@ -34,7 +35,7 @@ class BooksController < ApplicationController
 
     respond_to do |format|
       if @book.save
-        format.html { redirect_to @book, notice: 'Book was successfully created.' }
+        format.html { redirect_to my_books_path, notice: 'Book was successfully created.' }
         format.json { render :show, status: :created, location: @book }
       else
         format.html { render :new }
@@ -48,7 +49,7 @@ class BooksController < ApplicationController
   def update
     respond_to do |format|
       if @book.update(book_params)
-        format.html { redirect_to @book, notice: 'Book was successfully updated.' }
+        format.html { redirect_to my_books_path, notice: 'Book was successfully updated.' }
         format.json { render :show, status: :ok, location: @book }
       else
         format.html { render :edit }
@@ -60,9 +61,12 @@ class BooksController < ApplicationController
   # DELETE /books/1
   # DELETE /books/1.json
   def destroy
+    if @book.user != current_user
+      redirect_to my_books_path and return
+    end
     @book.destroy
     respond_to do |format|
-      format.html { redirect_to books_url, notice: 'Book was successfully destroyed.' }
+      format.html { redirect_to my_books_path, notice: 'Book was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

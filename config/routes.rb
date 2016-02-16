@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'my_books/index'
 
-  resources :books
+  resources :books, except: [:show]
   resources :profiles
   resources :checkouts
   resources :my_books, only: [:index]
