@@ -13,6 +13,9 @@
 
   <fieldset class="form-group">
     <%= f.label :book_image %><br/>
+    <% if @book.book_image %>
+      <%= image_tag @book.book_image, class: 'img', style: 'max-width: 5rem' %><br/>
+    <% end %>
     <%= f.file_field :book_image %>
   </fieldset>
   <fieldset class="form-group">

@@ -18,9 +18,9 @@
     <div class="btn-group pull-xs-right">
       <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= current_user.profile.name %></button>
       <div class="dropdown-menu">
-        <%= link_to 'My Profile', '/profile', class: 'dropdown-item' %>
-        <%= link_to "My Checkouts (#{current_user.checkouts.count})", '/checkouts', class: 'dropdown-item' %>
-        <%= link_to "My Books (#{current_user.books.count})", '/my_books', class: 'dropdown-item' %>
+        <%= link_to 'Profile', '/profile', class: 'dropdown-item' %>
+        <%= link_to "Checkouts (#{current_user.checkouts.count})", '/checkouts', class: 'dropdown-item' %>
+        <%= link_to "Books (#{current_user.books.count})", '/my_books', class: 'dropdown-item' %>
         <div class="dropdown-divider"></div>
         <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'dropdown-item'  %>
       </div>

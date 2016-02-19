@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get 'my_books/index'
 
   resources :books, except: [:show]
-  resources :profiles
+  resources :profiles, except: [:index]
   resources :checkouts
   resources :my_books, only: [:index]
   devise_for :users, controllers: {
