@@ -1,0 +1,15 @@
+h1 My Checkouts
+- if @checkouts.present?
+  - @checkouts.each do |checkout|
+    .book-item
+      = link_to 'Return', checkout, method: :delete, data: { confirm: "Are you sure you want to return this #{checkout.book.title}?" }, class: 'btn btn-sm btn-primary pull-sm-right'
+      = image_tag checkout.book.book_image, class: 'img pull-sm-left'
+      h4= link_to checkout.book.title, checkout.book.url, target: '_blank'
+      span= checkout.book.author
+      br/
+      small
+        | Owned by: #{checkout.book.user.profile.name}
+      p
+        | Checked out on #{checkout.checkout_date}
+- else
+  p You currently have no books checked out.

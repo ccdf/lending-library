@@ -1,0 +1,15 @@
+body
+  header.page-header
+    h1
+      | Library #{link_to 'Add a book', new_book_path, class: 'btn btn-success pull-sm-right'}
+    = form_tag(books_path, :method => "get", id: "search-form") do
+      label.sr-only for="s"  Search books
+      = text_field_tag :search, params[:search], id: "s", placeholder: "Search books...", class: 'form-control'
+  br/
+  br/
+  - if @books.present?
+    - @books.each do |book|
+      = render 'book', :book => book
+  - else
+    p
+      | There are no posts containing the term(s) #{params[:search]}.

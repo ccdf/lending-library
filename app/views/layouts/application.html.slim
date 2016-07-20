@@ -1,0 +1,35 @@
+doctype html
+html
+  head
+    title
+      | Library
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  body
+    .wrapper
+      header.site-header.clearfix
+        h1.pull-xs-left
+          a[href="/"]
+            | Lending Library
+        - if current_user
+          .btn-group.pull-xs-right
+            button.btn.dropdown-toggle[type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"]
+              = current_user.profile.name
+            .dropdown-menu
+              = link_to 'Profile', '/profile', class: 'dropdown-item'
+              = link_to "Checkouts (#{current_user.checkouts.count})", '/checkouts', class: 'dropdown-item'
+              = link_to "Books (#{current_user.books.count})", '/my_books', class: 'dropdown-item'
+              .dropdown-divider
+              = link_to "Logout", destroy_user_session_path, method: :delete, :class => 'dropdown-item'
+      main
+        - if notice
+          #notice.alert.alert-warning
+            = notice
+        - elsif alert
+          #notice.alert.alert-danger
+            = alert
+        = yield
+      footer
+        p.text-muted
+          | A small app by Jon Bergman

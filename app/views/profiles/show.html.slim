@@ -1,0 +1,7 @@
+p#notice
+  = notice
+p
+  strong
+    | Name:
+  = @profile.name
+= link_to 'Edit', edit_profile_path(@profile)

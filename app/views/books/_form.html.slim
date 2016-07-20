@@ -1,0 +1,27 @@
+= form_for(@book) do |f|
+  - if @book.errors.any?
+    #error_explanation
+      h2
+        = pluralize(@book.errors.count, "error")
+        | prohibited this book from being saved:
+      ul
+        - @book.errors.full_messages.each do |message|
+          li= message
+  fieldset.form-group
+    = f.label :book_image
+    br
+    - if @book.book_image
+      = image_tag @book.book_image, class: 'img', style: 'max-width: 5rem'
+      br
+    = f.file_field :book_image
+  fieldset.form-group
+    = f.label :title
+    = f.text_field :title, autofocus: true, class: 'form-control'
+  fieldset.form-group
+    = f.label :author
+    = f.text_field :author, class: 'form-control'
+  fieldset.form-group
+    = f.label :url
+    = f.text_area :url, class: 'form-control'
+  .actions
+    = f.submit nil, class: 'btn btn-success'

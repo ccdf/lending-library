@@ -1,0 +1,31 @@
+h1
+  | My Books 
+  = link_to 'Add a book', new_book_path, class: 'btn btn-success pull-sm-right'
+- if @books.present?
+  - @books.each do |book|
+    .book-item
+      - if get_availability(book)
+        = link_to 'Checkout', checkouts_path(book: book), method: :post, data: { confirm: "Are you sure you would like to checkout #{book.title}?" }, class: 'btn btn-sm btn-primary pull-sm-right'
+      - else
+        label.label.label-danger.pull-sm-right
+          | Checked out by 
+          = book.checkout.user.profile.name
+          |  on 
+          = book.checkout.checkout_date
+      = image_tag book.book_image, class: 'img pull-sm-left'
+      h4
+        = link_to book.title, book.url, target: '_blank'
+      span
+        = book.author
+      br
+      small
+        | Owned by: 
+        = book.user.profile.name
+      br
+      = link_to 'Edit', edit_book_path(book)
+      = link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' }
+- else
+  p
+    | There are no posts containing the term(s) 
+    = params[:search]
+    | .
