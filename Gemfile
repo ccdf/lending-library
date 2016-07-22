@@ -45,6 +45,7 @@ gem 'devise'
 gem 'slim'
 gem 'simple_form'
 gem 'bootstrap', '~> 4.0.0.alpha3'
+gem 'rmagick'
 
 gem 'carrierwave'
 

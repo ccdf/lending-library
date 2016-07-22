@@ -1,17 +1,11 @@
-.book-item
-  - if get_availability(book)
-    = link_to 'Checkout', checkouts_path(book: book), method: :post, data: { confirm: "Are you sure you would like to checkout #{book.title}?" }, class: 'btn btn-sm btn-primary pull-sm-right'
-  - else
-    label.label.label-danger.pull-sm-right Checked out
-    small
-      | Checked out by #{book.checkout.user.profile.name} on #{book.checkout.checkout_date.strftime("%b %d, %Y")}
-  = image_tag book.book_image, class: 'img pull-sm-left'
-  h4= link_to book.title, book.url, target: '_blank'
-  span= book.author
-  br
-  small
-    | Owned by: #{book.user.profile.name}
-  br
-  - if book.user == current_user
-    = link_to 'Edit', edit_book_path(book)
-    = link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' }
+.card.col-sm-3
+  = image_tag book.book_image, class: 'img-responsive card-img-top', alt: ''
+  .card-block
+    h4.card-title = book.title
+    p.card-text Some quick example text to build on the card title and make up the bulk of the card's content.
+    - if get_availability(book)
+      = link_to 'Checkout', checkouts_path(book: book), method: :post, data: { confirm: "Are you sure you would like to checkout #{book.title}?" }, class: 'btn btn-sm btn-primary pull-sm-right'
+    - else
+      label.label.label-danger.pull-sm-right Checked out
+      small
+        | Checked out by #{book.checkout.user.profile.name} on #{book.checkout.checkout_date.strftime("%b %d, %Y")}
